@@ -11,6 +11,7 @@ all: ${BINS}
 
 server: server.o ${LIBS} ${HEADERS}
 	${CC} server.o ${LIBS} -I${INC} -L${LIB} ${LDFLAGS} -o $@
+	@cp ./${BINS} ../bin/
 
 clean:
 	/bin/rm -rf ${BINS} *.o core *.core

@@ -29,7 +29,7 @@
 #include "workqueue.h"
 
 /* Port to listen on. */
-#define SERVER_PORT 5555
+#define SERVER_PORT 8888
 /* Connection backlog (# of backlogged connections to accept). */
 #define CONNECTION_BACKLOG 8
 /* Number of worker threads.  Should match number of CPU cores reported in 
@@ -344,5 +344,7 @@ static void sighandler(int signal) {
 /* Main function for demonstrating the echo server.
  * You can remove this and simply call runServer() from your application. */
 int main(int argc, char *argv[]) {
+    
+    daemon(0,0);
     return runServer();
 }
