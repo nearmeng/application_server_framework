@@ -1,6 +1,6 @@
 CFLAGS=-Wall -g
 LDFLAGS=-levent -lprotobuf-c -lpthread 
-LIBS=workqueue.o ../proto/cs_pkg.pb-c.o
+LIBS=workqueue.o ../proto/cs_pkg.pb-c.o asf_op.o
 HEADERS=workqueue.h ../proto/cs_pkg.pb-c.h
 BINS=server
 

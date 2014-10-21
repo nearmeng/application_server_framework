@@ -1,8 +1,7 @@
 #ifndef _ASF_OP_H_
 #define _ASF_OP_H_
 
-#include "../proto/cs_pkg.pb-c.h"
-
+#include "server.h"
 
 
 //登陆包处理
