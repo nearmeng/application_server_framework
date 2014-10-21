@@ -1,31 +1,31 @@
-message login_pkg
+message Login_Pkg
 {
-	required int msg_id = 1;
+	required int32 msg_id = 1;
 	required bytes username = 2;
 	required string password = 3;
 }
 
-message loc_report_pkg
+message Loc_Report_Pkg
 {
-	required int msg_id = 1;
-	required int x_loc = 2;
-	required int y_loc = 3;
+	required int32 msg_id = 1;
+	required int32 x_loc = 2;
+	required int32 y_loc = 3;
 }
 
-message head_pkg
+message Head_Pkg
 {
-	required int msg_id = 1;	
+	required int32 msg_id = 1;	
 }
 
-message body_pkg
+message Body_Pkg
 {
-	optional message login_pkg;
-	optional message loc_report_pkg;
+	optional Login_Pkg login_pkg = 1;
+	optional Loc_Report_Pkg loc_report_pkg = 2;
 }
 
-message cs_pkg
+message Cs_Pkg
 {
-	required message head_pkg;
-	required message body_pkg;
+	required Head_Pkg head_pkg = 1;
+	required Body_Pkg body_pkg = 2;
 }
 
