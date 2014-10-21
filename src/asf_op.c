@@ -1,8 +1,7 @@
 #include "asf_op.h"
 
-
 int deal_login_msg(CsPkg* msg, client_t* client)
-
+{
     char username[NAME_SIZE];
     char password[PWD_SIZE];
 
