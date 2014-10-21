@@ -8,3 +8,5 @@ enum msg_type
 	LOC_REPORT_MSG = 2,
 	MSG_TYPE_MAX
 };
+
+#endif

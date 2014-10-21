@@ -135,7 +135,7 @@ static void server_job_function(struct job *job) {
 
         if(msg_in != NULL)
         {
-            switch(msg_in->head_pkg.msg_id)
+            switch(msg_in->head_pkg->msg_id)
             {
                 case LOGIN_MSG:
                     printf("This is a Login msg...\n");
