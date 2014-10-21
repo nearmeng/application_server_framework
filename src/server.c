@@ -94,6 +94,31 @@ static void closeAndFreeClient(client_t *client) {
     }
 }
 
+static int deal_login_msg(CsPkg* msg)
+{
+    char username[NAME_SIZE];
+    char password[PWD_SIZE];
+
+    strncpy(username, msg->body_pkg->login_pkg->username, sizeof(username));
+    strncpy(password, msg->body_pkg->login_pkg->password, sizeof(password));
+
+    switch(msg->body_pkg->login_pkg->msg_id)
+    {
+        case PRINT_THE_NAME:
+            printf("the name is %s\n", username) ;
+            break;
+        case PRINT_THE_PASSWORD:
+            printf("the password is %s\n", password);
+            break;
+
+        default:
+            printf("wrong msg_id in deal_login_msg\n");
+            break;
+    }
+
+    return 0;
+}
+
 /* work to do */
 static void server_job_function(struct job *job) {
     client_t *client = (client_t *)job->user_data;
@@ -103,6 +128,8 @@ static void server_job_function(struct job *job) {
 
     char pkg_len[4];
     int* get_pkg_len;
+
+    int ret = 0;
 
     for(;;)
     {
@@ -127,7 +154,7 @@ static void server_job_function(struct job *job) {
         nbytes = bufferevent_read(client->buf_ev, recv_data, *get_pkg_len);
         if(nbytes <= 0)
         {
-            printf("bufferevent_read %d bytes error!", *get_pkg_len);
+            printf("bufferevent_read %d bytes error!\n", *get_pkg_len);
             break;
         }
         CsPkg *msg_in;
@@ -138,9 +165,11 @@ static void server_job_function(struct job *job) {
             switch(msg_in->head_pkg->msg_id)
             {
                 case LOGIN_MSG:
-                    printf("This is a Login msg...\n");
+                    ret = deal_login_msg(msg_in);
+                    break;
                 case LOC_REPORT_MSG:
                     printf("THis is a Loction report msg...\n");
+                    break;
                 default:
                     printf("Error msg recved!\n");
                     break;
@@ -150,6 +179,8 @@ static void server_job_function(struct job *job) {
 
         //3. callback the corresponding function
     }
+
+    return ret;
 
 }
 

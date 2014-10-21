@@ -1,7 +1,7 @@
 message Login_Pkg
 {
 	required int32 msg_id = 1;
-	required bytes username = 2;
+	required string username = 2;
 	required string password = 3;
 }
 

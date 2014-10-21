@@ -31,12 +31,12 @@ struct  _LoginPkg
 {
   ProtobufCMessage base;
   int32_t msg_id;
-  ProtobufCBinaryData username;
+  char *username;
   char *password;
 };
 #define LOGIN__PKG__INIT \
  { PROTOBUF_C_MESSAGE_INIT (&login__pkg__descriptor) \
-    , 0, {0,NULL}, NULL }
+    , 0, NULL, NULL }
 
 
 struct  _LocReportPkg

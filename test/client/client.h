@@ -11,9 +11,10 @@ enum msg_type
 
 enum login_msg_type
 {
-	MSG_TYPE_INVALID = 0,
+	LOGIN_MSG_TYPE_INVALID = 0,
 	PRINT_THE_NAME = 1,
-	MSG_TYPE_MAX
+	PRINT_THE_PASSWORD = 2,
+	LOGIN_MSG_TYPE_MAX
 };
 
 #endif

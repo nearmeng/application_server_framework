@@ -240,7 +240,7 @@ static const ProtobufCFieldDescriptor login__pkg__field_descriptors[3] =
     "username",
     2,
     PROTOBUF_C_LABEL_REQUIRED,
-    PROTOBUF_C_TYPE_BYTES,
+    PROTOBUF_C_TYPE_STRING,
     0,   /* quantifier_offset */
     PROTOBUF_C_OFFSETOF(LoginPkg, username),
     NULL,

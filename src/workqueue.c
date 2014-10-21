@@ -47,9 +47,9 @@ static void *worker_function(void *ptr) {
         if (job == NULL) continue;
 
         /* Execute the job. */
-        fprintf(stderr,"worker %d accept the job    ",worker->worker_id);
+        //fprintf(stderr,"worker %d accept the job    ",worker->worker_id);
         job->job_function(job);
-        fprintf(stderr,"finished!\n");
+        //fprintf(stderr,"finished!\n");
     }
 
     free(worker);
