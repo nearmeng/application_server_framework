@@ -1,0 +1,31 @@
+message login_pkg
+{
+	required int msg_id = 1;
+	required bytes username = 2;
+	required string password = 3;
+}
+
+message loc_report_pkg
+{
+	required int msg_id = 1;
+	required int x_loc = 2;
+	required int y_loc = 3;
+}
+
+message head_pkg
+{
+	required int msg_id = 1;	
+}
+
+message body_pkg
+{
+	optional message login_pkg;
+	optional message loc_report_pkg;
+}
+
+message cs_pkg
+{
+	required message head_pkg;
+	required message body_pkg;
+}
+

@@ -1,13 +1,3 @@
-/**
- * Multithreaded, libevent 2.x-based socket server.
- * Copyright (c) 2012 Qi Huang
- * This software is licensed under the BSD license.
- * See the accompanying LICENSE.txt for details.
- *
- * To compile: ./make
- * To run: ./server
- */
-
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
@@ -106,8 +96,12 @@ static void server_job_function(struct job *job) {
     char data[4096];
     int nbytes;
 
+    char pkg_len[4];
+    int* get_pkg_len;
+
     for(;;)
     {
+/* echo 操作
         nbytes =  bufferevent_read(client->buf_ev, data, sizeof(data));
         if(nbytes <= 0)
         {
@@ -115,6 +109,25 @@ static void server_job_function(struct job *job) {
         }
 
         bufferevent_write(client->buf_ev, data, nbytes);
+*/
+        //1. get 4 bytes to know the length
+        nbytes = bufferevent_read(client->buf_ev, pkg_len, sizeof(pkg_len));
+        if(nbytes != 4)
+        {
+            break;
+        }
+
+        //2. use the protobuf to unpack the msg
+        get_pkg_len = (int*)pkg_len;
+        nbytes = bufferevent_read(client->buf_ev, data, *get_pkg_len);
+        if(nbytes <= 0)
+        {
+            printf("bufferevent_read %d bytes error!", *get_pkg_len);
+            break;
+        }
+        
+
+        //3. callback the corresponding function
     }
 
 }
