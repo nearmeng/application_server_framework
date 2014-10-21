@@ -1,7 +1,7 @@
 CFLAGS=-Wall -g
-LDFLAGS=-levent -lpthread
-LIBS=workqueue.o
-HEADERS=workqueue.h
+LDFLAGS=-levent -lprotobuf-c -lpthread 
+LIBS=workqueue.o cs_pkg.pb-c.o
+HEADERS=workqueue.h cs_pkg.pb-c.h
 BINS=server
 
 INC=../lib/libevent-2.0.20-stable/include/

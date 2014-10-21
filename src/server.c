@@ -18,6 +18,11 @@
 
 #include "workqueue.h"
 
+#include "server.h"
+#include "../proto/cs_pkg.pb-c.h"
+#include "mysql/mysql.h"
+
+
 /* Port to listen on. */
 #define SERVER_PORT 8888
 /* Connection backlog (# of backlogged connections to accept). */
@@ -93,7 +98,7 @@ static void closeAndFreeClient(client_t *client) {
 static void server_job_function(struct job *job) {
     client_t *client = (client_t *)job->user_data;
 
-    char data[4096];
+    char recv_data[4096];
     int nbytes;
 
     char pkg_len[4];
@@ -119,13 +124,29 @@ static void server_job_function(struct job *job) {
 
         //2. use the protobuf to unpack the msg
         get_pkg_len = (int*)pkg_len;
-        nbytes = bufferevent_read(client->buf_ev, data, *get_pkg_len);
+        nbytes = bufferevent_read(client->buf_ev, recv_data, *get_pkg_len);
         if(nbytes <= 0)
         {
             printf("bufferevent_read %d bytes error!", *get_pkg_len);
             break;
         }
-        
+        CsPkg *msg_in;
+        msg_in = cs__pkg__unpack(NULL, *get_pkg_len, (uint8_t*) &recv_data);
+
+        if(msg_in != NULL)
+        {
+            switch(msg_in->head_pkg.msg_id)
+            {
+                case LOGIN_MSG:
+                    printf("This is a Login msg...\n");
+                case LOC_REPORT_MSG:
+                    printf("THis is a Loction report msg...\n");
+                default:
+                    printf("Error msg recved!\n");
+                    break;
+            }
+        }
+        cs__pkg__free_unpacked(msg_in, NULL);
 
         //3. callback the corresponding function
     }
@@ -358,6 +379,6 @@ static void sighandler(int signal) {
  * You can remove this and simply call runServer() from your application. */
 int main(int argc, char *argv[]) {
     
-    daemon(0,0);
+    //daemon(0,0);
     return runServer();
 }
