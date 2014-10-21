@@ -20,7 +20,7 @@
 
 #include "server.h"
 #include "../proto/cs_pkg.pb-c.h"
-#include "mysql/mysql.h"
+#include "asf_op.h"
 
 
 /* Port to listen on. */
@@ -94,30 +94,7 @@ static void closeAndFreeClient(client_t *client) {
     }
 }
 
-static int deal_login_msg(CsPkg* msg)
-{
-    char username[NAME_SIZE];
-    char password[PWD_SIZE];
 
-    strncpy(username, msg->body_pkg->login_pkg->username, sizeof(username));
-    strncpy(password, msg->body_pkg->login_pkg->password, sizeof(password));
-
-    switch(msg->body_pkg->login_pkg->msg_id)
-    {
-        case PRINT_THE_NAME:
-            printf("the name is %s\n", username) ;
-            break;
-        case PRINT_THE_PASSWORD:
-            printf("the password is %s\n", password);
-            break;
-
-        default:
-            printf("wrong msg_id in deal_login_msg\n");
-            break;
-    }
-
-    return 0;
-}
 
 /* work to do */
 static void server_job_function(struct job *job) {
@@ -160,15 +137,16 @@ static void server_job_function(struct job *job) {
         CsPkg *msg_in;
         msg_in = cs__pkg__unpack(NULL, *get_pkg_len, (uint8_t*) &recv_data);
 
+        //3. 对接收到的数据包进行相应的处理 
         if(msg_in != NULL)
         {
             switch(msg_in->head_pkg->msg_id)
             {
                 case LOGIN_MSG:
-                    ret = deal_login_msg(msg_in);
+                    ret = deal_login_msg(msg_in, client);
                     break;
                 case LOC_REPORT_MSG:
-                    printf("THis is a Loction report msg...\n");
+                    ret = deal_loc_report_msg(msg_in, client);
                     break;
                 default:
                     printf("Error msg recved!\n");
@@ -177,7 +155,6 @@ static void server_job_function(struct job *job) {
         }
         cs__pkg__free_unpacked(msg_in, NULL);
 
-        //3. callback the corresponding function
     }
 
     return ret;

@@ -1,6 +1,12 @@
 #ifndef _CLIENT_H_
 #define _CLIENT_H_
 
+#define SERVER_ADDR "127.0.0.1"
+#define SERVER_PORT 8888
+#define BUFSIZE 1000
+#define NAME_SIZE 20
+#define PWD_SIZE 20
+
 enum msg_type
 {
 	MSG_TYPE_INVALID = 0,

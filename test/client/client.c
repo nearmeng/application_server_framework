@@ -8,11 +8,6 @@
 #include "client.h"
 #include "../../proto/cs_pkg.pb-c.h"
 
-#define SERVER_ADDR "127.0.0.1"
-#define SERVER_PORT 8888
-#define BUFSIZE 1000
-#define NAME_SIZE 20
-#define PWD_SIZE 20
 
 int main()
 {
@@ -49,7 +44,7 @@ int main()
 
 	while(1)
 	{
-		//create and send a cspkg
+		//create a cspkg
 		CsPkg msg = CS__PKG__INIT;
         HeadPkg head_pkg = HEAD__PKG__INIT;
         BodyPkg body_pkg = BODY__PKG__INIT;
@@ -63,6 +58,7 @@ int main()
         msg.body_pkg->login_pkg->password = malloc(PWD_SIZE);
         msg.body_pkg->loc_report_pkg = &loc_report_pkg;
 
+        //填充数据包
 		msg.head_pkg->msg_id = LOGIN_MSG;
 		msg.body_pkg->login_pkg->msg_id = PRINT_THE_PASSWORD;
 		strncpy(msg.body_pkg->login_pkg->username, "nearmeng", 
@@ -70,7 +66,7 @@ int main()
 		strncpy(msg.body_pkg->login_pkg->password, "12345", 
                 sizeof(msg.body_pkg->login_pkg->password));
 
-		//add 4 bytes and put into the buf
+		//在包前插入4个字节用于表征包的长度
 		len = cs__pkg__get_packed_size(&msg);
 		send_buf = (char*)malloc(len + 4);
 		cs__pkg__pack(&msg, send_buf + 4);
