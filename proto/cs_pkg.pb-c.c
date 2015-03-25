@@ -2,8 +2,8 @@
 /* Generated from: cs_pkg.proto */
 
 /* Do not generate deprecated warnings for self */
-#ifndef PROTOBUF_C_NO_DEPRECATED
-#define PROTOBUF_C_NO_DEPRECATED
+#ifndef PROTOBUF_C__NO_DEPRECATED
+#define PROTOBUF_C__NO_DEPRECATED
 #endif
 
 #include "cs_pkg.pb-c.h"
@@ -16,21 +16,21 @@ void   login__pkg__init
 size_t login__pkg__get_packed_size
                      (const LoginPkg *message)
 {
-  PROTOBUF_C_ASSERT (message->base.descriptor == &login__pkg__descriptor);
+  assert(message->base.descriptor == &login__pkg__descriptor);
   return protobuf_c_message_get_packed_size ((const ProtobufCMessage*)(message));
 }
 size_t login__pkg__pack
                      (const LoginPkg *message,
                       uint8_t       *out)
 {
-  PROTOBUF_C_ASSERT (message->base.descriptor == &login__pkg__descriptor);
+  assert(message->base.descriptor == &login__pkg__descriptor);
   return protobuf_c_message_pack ((const ProtobufCMessage*)message, out);
 }
 size_t login__pkg__pack_to_buffer
                      (const LoginPkg *message,
                       ProtobufCBuffer *buffer)
 {
-  PROTOBUF_C_ASSERT (message->base.descriptor == &login__pkg__descriptor);
+  assert(message->base.descriptor == &login__pkg__descriptor);
   return protobuf_c_message_pack_to_buffer ((const ProtobufCMessage*)message, buffer);
 }
 LoginPkg *
@@ -47,7 +47,7 @@ void   login__pkg__free_unpacked
                      (LoginPkg *message,
                       ProtobufCAllocator *allocator)
 {
-  PROTOBUF_C_ASSERT (message->base.descriptor == &login__pkg__descriptor);
+  assert(message->base.descriptor == &login__pkg__descriptor);
   protobuf_c_message_free_unpacked ((ProtobufCMessage*)message, allocator);
 }
 void   loc__report__pkg__init
@@ -59,21 +59,21 @@ void   loc__report__pkg__init
 size_t loc__report__pkg__get_packed_size
                      (const LocReportPkg *message)
 {
-  PROTOBUF_C_ASSERT (message->base.descriptor == &loc__report__pkg__descriptor);
+  assert(message->base.descriptor == &loc__report__pkg__descriptor);
   return protobuf_c_message_get_packed_size ((const ProtobufCMessage*)(message));
 }
 size_t loc__report__pkg__pack
                      (const LocReportPkg *message,
                       uint8_t       *out)
 {
-  PROTOBUF_C_ASSERT (message->base.descriptor == &loc__report__pkg__descriptor);
+  assert(message->base.descriptor == &loc__report__pkg__descriptor);
   return protobuf_c_message_pack ((const ProtobufCMessage*)message, out);
 }
 size_t loc__report__pkg__pack_to_buffer
                      (const LocReportPkg *message,
                       ProtobufCBuffer *buffer)
 {
-  PROTOBUF_C_ASSERT (message->base.descriptor == &loc__report__pkg__descriptor);
+  assert(message->base.descriptor == &loc__report__pkg__descriptor);
   return protobuf_c_message_pack_to_buffer ((const ProtobufCMessage*)message, buffer);
 }
 LocReportPkg *
@@ -90,7 +90,7 @@ void   loc__report__pkg__free_unpacked
                      (LocReportPkg *message,
                       ProtobufCAllocator *allocator)
 {
-  PROTOBUF_C_ASSERT (message->base.descriptor == &loc__report__pkg__descriptor);
+  assert(message->base.descriptor == &loc__report__pkg__descriptor);
   protobuf_c_message_free_unpacked ((ProtobufCMessage*)message, allocator);
 }
 void   head__pkg__init
@@ -102,21 +102,21 @@ void   head__pkg__init
 size_t head__pkg__get_packed_size
                      (const HeadPkg *message)
 {
-  PROTOBUF_C_ASSERT (message->base.descriptor == &head__pkg__descriptor);
+  assert(message->base.descriptor == &head__pkg__descriptor);
   return protobuf_c_message_get_packed_size ((const ProtobufCMessage*)(message));
 }
 size_t head__pkg__pack
                      (const HeadPkg *message,
                       uint8_t       *out)
 {
-  PROTOBUF_C_ASSERT (message->base.descriptor == &head__pkg__descriptor);
+  assert(message->base.descriptor == &head__pkg__descriptor);
   return protobuf_c_message_pack ((const ProtobufCMessage*)message, out);
 }
 size_t head__pkg__pack_to_buffer
                      (const HeadPkg *message,
                       ProtobufCBuffer *buffer)
 {
-  PROTOBUF_C_ASSERT (message->base.descriptor == &head__pkg__descriptor);
+  assert(message->base.descriptor == &head__pkg__descriptor);
   return protobuf_c_message_pack_to_buffer ((const ProtobufCMessage*)message, buffer);
 }
 HeadPkg *
@@ -133,7 +133,7 @@ void   head__pkg__free_unpacked
                      (HeadPkg *message,
                       ProtobufCAllocator *allocator)
 {
-  PROTOBUF_C_ASSERT (message->base.descriptor == &head__pkg__descriptor);
+  assert(message->base.descriptor == &head__pkg__descriptor);
   protobuf_c_message_free_unpacked ((ProtobufCMessage*)message, allocator);
 }
 void   body__pkg__init
@@ -145,21 +145,21 @@ void   body__pkg__init
 size_t body__pkg__get_packed_size
                      (const BodyPkg *message)
 {
-  PROTOBUF_C_ASSERT (message->base.descriptor == &body__pkg__descriptor);
+  assert(message->base.descriptor == &body__pkg__descriptor);
   return protobuf_c_message_get_packed_size ((const ProtobufCMessage*)(message));
 }
 size_t body__pkg__pack
                      (const BodyPkg *message,
                       uint8_t       *out)
 {
-  PROTOBUF_C_ASSERT (message->base.descriptor == &body__pkg__descriptor);
+  assert(message->base.descriptor == &body__pkg__descriptor);
   return protobuf_c_message_pack ((const ProtobufCMessage*)message, out);
 }
 size_t body__pkg__pack_to_buffer
                      (const BodyPkg *message,
                       ProtobufCBuffer *buffer)
 {
-  PROTOBUF_C_ASSERT (message->base.descriptor == &body__pkg__descriptor);
+  assert(message->base.descriptor == &body__pkg__descriptor);
   return protobuf_c_message_pack_to_buffer ((const ProtobufCMessage*)message, buffer);
 }
 BodyPkg *
@@ -176,7 +176,7 @@ void   body__pkg__free_unpacked
                      (BodyPkg *message,
                       ProtobufCAllocator *allocator)
 {
-  PROTOBUF_C_ASSERT (message->base.descriptor == &body__pkg__descriptor);
+  assert(message->base.descriptor == &body__pkg__descriptor);
   protobuf_c_message_free_unpacked ((ProtobufCMessage*)message, allocator);
 }
 void   cs__pkg__init
@@ -188,21 +188,21 @@ void   cs__pkg__init
 size_t cs__pkg__get_packed_size
                      (const CsPkg *message)
 {
-  PROTOBUF_C_ASSERT (message->base.descriptor == &cs__pkg__descriptor);
+  assert(message->base.descriptor == &cs__pkg__descriptor);
   return protobuf_c_message_get_packed_size ((const ProtobufCMessage*)(message));
 }
 size_t cs__pkg__pack
                      (const CsPkg *message,
                       uint8_t       *out)
 {
-  PROTOBUF_C_ASSERT (message->base.descriptor == &cs__pkg__descriptor);
+  assert(message->base.descriptor == &cs__pkg__descriptor);
   return protobuf_c_message_pack ((const ProtobufCMessage*)message, out);
 }
 size_t cs__pkg__pack_to_buffer
                      (const CsPkg *message,
                       ProtobufCBuffer *buffer)
 {
-  PROTOBUF_C_ASSERT (message->base.descriptor == &cs__pkg__descriptor);
+  assert(message->base.descriptor == &cs__pkg__descriptor);
   return protobuf_c_message_pack_to_buffer ((const ProtobufCMessage*)message, buffer);
 }
 CsPkg *
@@ -219,7 +219,7 @@ void   cs__pkg__free_unpacked
                      (CsPkg *message,
                       ProtobufCAllocator *allocator)
 {
-  PROTOBUF_C_ASSERT (message->base.descriptor == &cs__pkg__descriptor);
+  assert(message->base.descriptor == &cs__pkg__descriptor);
   protobuf_c_message_free_unpacked ((ProtobufCMessage*)message, allocator);
 }
 static const ProtobufCFieldDescriptor login__pkg__field_descriptors[3] =
@@ -230,7 +230,7 @@ static const ProtobufCFieldDescriptor login__pkg__field_descriptors[3] =
     PROTOBUF_C_LABEL_REQUIRED,
     PROTOBUF_C_TYPE_INT32,
     0,   /* quantifier_offset */
-    PROTOBUF_C_OFFSETOF(LoginPkg, msg_id),
+    offsetof(LoginPkg, msg_id),
     NULL,
     NULL,
     0,             /* flags */
@@ -242,7 +242,7 @@ static const ProtobufCFieldDescriptor login__pkg__field_descriptors[3] =
     PROTOBUF_C_LABEL_REQUIRED,
     PROTOBUF_C_TYPE_STRING,
     0,   /* quantifier_offset */
-    PROTOBUF_C_OFFSETOF(LoginPkg, username),
+    offsetof(LoginPkg, username),
     NULL,
     NULL,
     0,             /* flags */
@@ -254,7 +254,7 @@ static const ProtobufCFieldDescriptor login__pkg__field_descriptors[3] =
     PROTOBUF_C_LABEL_REQUIRED,
     PROTOBUF_C_TYPE_STRING,
     0,   /* quantifier_offset */
-    PROTOBUF_C_OFFSETOF(LoginPkg, password),
+    offsetof(LoginPkg, password),
     NULL,
     NULL,
     0,             /* flags */
@@ -273,7 +273,7 @@ static const ProtobufCIntRange login__pkg__number_ranges[1 + 1] =
 };
 const ProtobufCMessageDescriptor login__pkg__descriptor =
 {
-  PROTOBUF_C_MESSAGE_DESCRIPTOR_MAGIC,
+  PROTOBUF_C__MESSAGE_DESCRIPTOR_MAGIC,
   "Login_Pkg",
   "LoginPkg",
   "LoginPkg",
@@ -294,7 +294,7 @@ static const ProtobufCFieldDescriptor loc__report__pkg__field_descriptors[3] =
     PROTOBUF_C_LABEL_REQUIRED,
     PROTOBUF_C_TYPE_INT32,
     0,   /* quantifier_offset */
-    PROTOBUF_C_OFFSETOF(LocReportPkg, msg_id),
+    offsetof(LocReportPkg, msg_id),
     NULL,
     NULL,
     0,             /* flags */
@@ -306,7 +306,7 @@ static const ProtobufCFieldDescriptor loc__report__pkg__field_descriptors[3] =
     PROTOBUF_C_LABEL_REQUIRED,
     PROTOBUF_C_TYPE_INT32,
     0,   /* quantifier_offset */
-    PROTOBUF_C_OFFSETOF(LocReportPkg, x_loc),
+    offsetof(LocReportPkg, x_loc),
     NULL,
     NULL,
     0,             /* flags */
@@ -318,7 +318,7 @@ static const ProtobufCFieldDescriptor loc__report__pkg__field_descriptors[3] =
     PROTOBUF_C_LABEL_REQUIRED,
     PROTOBUF_C_TYPE_INT32,
     0,   /* quantifier_offset */
-    PROTOBUF_C_OFFSETOF(LocReportPkg, y_loc),
+    offsetof(LocReportPkg, y_loc),
     NULL,
     NULL,
     0,             /* flags */
@@ -337,7 +337,7 @@ static const ProtobufCIntRange loc__report__pkg__number_ranges[1 + 1] =
 };
 const ProtobufCMessageDescriptor loc__report__pkg__descriptor =
 {
-  PROTOBUF_C_MESSAGE_DESCRIPTOR_MAGIC,
+  PROTOBUF_C__MESSAGE_DESCRIPTOR_MAGIC,
   "Loc_Report_Pkg",
   "LocReportPkg",
   "LocReportPkg",
@@ -358,7 +358,7 @@ static const ProtobufCFieldDescriptor head__pkg__field_descriptors[1] =
     PROTOBUF_C_LABEL_REQUIRED,
     PROTOBUF_C_TYPE_INT32,
     0,   /* quantifier_offset */
-    PROTOBUF_C_OFFSETOF(HeadPkg, msg_id),
+    offsetof(HeadPkg, msg_id),
     NULL,
     NULL,
     0,             /* flags */
@@ -375,7 +375,7 @@ static const ProtobufCIntRange head__pkg__number_ranges[1 + 1] =
 };
 const ProtobufCMessageDescriptor head__pkg__descriptor =
 {
-  PROTOBUF_C_MESSAGE_DESCRIPTOR_MAGIC,
+  PROTOBUF_C__MESSAGE_DESCRIPTOR_MAGIC,
   "Head_Pkg",
   "HeadPkg",
   "HeadPkg",
@@ -396,7 +396,7 @@ static const ProtobufCFieldDescriptor body__pkg__field_descriptors[2] =
     PROTOBUF_C_LABEL_OPTIONAL,
     PROTOBUF_C_TYPE_MESSAGE,
     0,   /* quantifier_offset */
-    PROTOBUF_C_OFFSETOF(BodyPkg, login_pkg),
+    offsetof(BodyPkg, login_pkg),
     &login__pkg__descriptor,
     NULL,
     0,             /* flags */
@@ -408,7 +408,7 @@ static const ProtobufCFieldDescriptor body__pkg__field_descriptors[2] =
     PROTOBUF_C_LABEL_OPTIONAL,
     PROTOBUF_C_TYPE_MESSAGE,
     0,   /* quantifier_offset */
-    PROTOBUF_C_OFFSETOF(BodyPkg, loc_report_pkg),
+    offsetof(BodyPkg, loc_report_pkg),
     &loc__report__pkg__descriptor,
     NULL,
     0,             /* flags */
@@ -426,7 +426,7 @@ static const ProtobufCIntRange body__pkg__number_ranges[1 + 1] =
 };
 const ProtobufCMessageDescriptor body__pkg__descriptor =
 {
-  PROTOBUF_C_MESSAGE_DESCRIPTOR_MAGIC,
+  PROTOBUF_C__MESSAGE_DESCRIPTOR_MAGIC,
   "Body_Pkg",
   "BodyPkg",
   "BodyPkg",
@@ -447,7 +447,7 @@ static const ProtobufCFieldDescriptor cs__pkg__field_descriptors[2] =
     PROTOBUF_C_LABEL_REQUIRED,
     PROTOBUF_C_TYPE_MESSAGE,
     0,   /* quantifier_offset */
-    PROTOBUF_C_OFFSETOF(CsPkg, head_pkg),
+    offsetof(CsPkg, head_pkg),
     &head__pkg__descriptor,
     NULL,
     0,             /* flags */
@@ -459,7 +459,7 @@ static const ProtobufCFieldDescriptor cs__pkg__field_descriptors[2] =
     PROTOBUF_C_LABEL_REQUIRED,
     PROTOBUF_C_TYPE_MESSAGE,
     0,   /* quantifier_offset */
-    PROTOBUF_C_OFFSETOF(CsPkg, body_pkg),
+    offsetof(CsPkg, body_pkg),
     &body__pkg__descriptor,
     NULL,
     0,             /* flags */
@@ -477,7 +477,7 @@ static const ProtobufCIntRange cs__pkg__number_ranges[1 + 1] =
 };
 const ProtobufCMessageDescriptor cs__pkg__descriptor =
 {
-  PROTOBUF_C_MESSAGE_DESCRIPTOR_MAGIC,
+  PROTOBUF_C__MESSAGE_DESCRIPTOR_MAGIC,
   "Cs_Pkg",
   "CsPkg",
   "CsPkg",

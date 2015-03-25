@@ -1,11 +1,13 @@
 FLAGS=-lprotobuf-c
+LIB=../../lib/protbuf-c/libs
 BINS=client
+
 
 all: ${BINS}
 
 client: client.o ../../proto/cs_pkg.pb-c.o
 	${CC} -c client.c 
-	$(CC) -o $@ client.o ../../proto/cs_pkg.pb-c.o ${FLAGS}
+	$(CC) -o $@ client.o ../../proto/cs_pkg.pb-c.o -L${LIB} ${FLAGS}
 	@cp ./${BINS} ../../bin/
 
 
