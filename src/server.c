@@ -88,7 +88,6 @@ static void server_job_function(struct job *job) {
             default:
                 printf("Error msg recved!\n");
                 break;
-            }
         }
         cs__pkg__free_unpacked(msg_in, NULL);
 
