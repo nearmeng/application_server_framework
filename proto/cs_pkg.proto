@@ -5,7 +5,7 @@ message Login_Pkg
 	required string password = 3;
 }
 
-message Login_Rsponse_Pkg
+message Login_Response_Pkg
 {
 	required int32 msg_id = 1;
 	required string server_name = 2;

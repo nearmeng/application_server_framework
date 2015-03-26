@@ -61,7 +61,7 @@ static void server_job_function(struct job *job) {
     bufferevent_write(client->buf_ev, data, nbytes);
 */
     //1. get to know the length
-    input = bufferevent_get_input(client->buff_ev);
+    input = bufferevent_get_input(client->buf_ev);
     data_len = (int)evbuffer_get_length(input);
 
     //2. use the protobuf to unpack the msg
@@ -87,8 +87,6 @@ static void server_job_function(struct job *job) {
                 break;
             default:
                 printf("Error msg recved!\n");
-                break;
-            }
         }
         cs__pkg__free_unpacked(msg_in, NULL);
 
@@ -183,11 +181,8 @@ void on_accept(evutil_socket_t fd, short ev, void *arg) {
      * to initialize your application-specific attributes in the client struct.
      */
 
-    if ((client->output_buffer = evbuffer_new()) == NULL) {
-        warn("client output buffer allocation failed");
-        closeAndFreeClient(client);
-        return;
-    }
+    client->response = NULL;
+    client->response_len = 0;
 
     /* Create the buffered event.
      *
@@ -305,7 +300,6 @@ int runServer(void) {
     evbase_accept = NULL;
 
     close(listenfd);
-    killServer();
 
     printf("Server shutdown.\n");
 
