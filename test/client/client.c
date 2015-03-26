@@ -68,13 +68,12 @@ int main()
 
 		//在包前插入4个字节用于表征包的长度
 		len = cs__pkg__get_packed_size(&msg);
-		send_buf = (char*)malloc(len + 4);
-		cs__pkg__pack(&msg, send_buf + 4);
-		*(int *)send_buf = len;
+		send_buf = (char*)malloc(len);
+		cs__pkg__pack(&msg, send_buf);
     
         printf("the pkg size is %d\n",len);
 		//send the pkg
-		len = send(client_fd, send_buf, len + 4, 0);
+		len = send(client_fd, send_buf, len, 0);
 		len = recv(client_fd, recv_buf, BUFSIZE, 0);
 
 		printf("recved %s\n", recv_buf);

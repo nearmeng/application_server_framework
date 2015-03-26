@@ -5,6 +5,13 @@ message Login_Pkg
 	required string password = 3;
 }
 
+message Login_Rsponse_Pkg
+{
+	required int32 msg_id = 1;
+	required string server_name = 2;
+	required int32 result_code = 3;
+}
+
 message Loc_Report_Pkg
 {
 	required int32 msg_id = 1;
@@ -21,6 +28,7 @@ message Body_Pkg
 {
 	optional Login_Pkg login_pkg = 1;
 	optional Loc_Report_Pkg loc_report_pkg = 2;
+	optional Login_Response_Pkg login_res_pkg = 3;
 }
 
 message Cs_Pkg
@@ -28,4 +36,5 @@ message Cs_Pkg
 	required Head_Pkg head_pkg = 1;
 	required Body_Pkg body_pkg = 2;
 }
+
 
