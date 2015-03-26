@@ -30,9 +30,9 @@ static void closeAndFreeClient(client_t *client) {
             client->evbase = NULL;
         }
         */
-        if (client->output_buffer != NULL) {
-            evbuffer_free(client->output_buffer);
-            client->output_buffer = NULL;
+        if (client->response != NULL) {
+            free(client->response);
+            client->response = NULL;
         }
         free(client);
     }
@@ -45,60 +45,65 @@ static void server_job_function(struct job *job) {
     client_t *client = (client_t *)job->user_data;
 
     char recv_data[4096];
-    int nbytes;
 
-    char pkg_len[4];
-    int* get_pkg_len;
+    struct evbuffer* input;
+    int data_len;
+    int nbytes;
 
     int ret = 0;
 
-    for(;;)
-    {
 /* echo 操作
-        nbytes =  bufferevent_read(client->buf_ev, data, sizeof(data));
-        if(nbytes <= 0)
-        {
-            break;
-        }
-
-        bufferevent_write(client->buf_ev, data, nbytes);
+    nbytes =  bufferevent_read(client->buf_ev, data, sizeof(data));
+    if(nbytes <= 0)
+    {
+        break;
+    }
+    bufferevent_write(client->buf_ev, data, nbytes);
 */
-        //1. get 4 bytes to know the length
-        nbytes = bufferevent_read(client->buf_ev, pkg_len, sizeof(pkg_len));
-        if(nbytes != 4)
-        {
-            break;
-        }
+    //1. get to know the length
+    input = bufferevent_get_input(client->buff_ev);
+    data_len = (int)evbuffer_get_length(input);
 
-        //2. use the protobuf to unpack the msg
-        get_pkg_len = (int*)pkg_len;
-        nbytes = bufferevent_read(client->buf_ev, recv_data, *get_pkg_len);
-        if(nbytes <= 0)
-        {
-            printf("bufferevent_read %d bytes error!\n", *get_pkg_len);
-            break;
-        }
-        CsPkg *msg_in;
-        msg_in = cs__pkg__unpack(NULL, *get_pkg_len, (uint8_t*) &recv_data);
+    //2. use the protobuf to unpack the msg
+    nbytes = bufferevent_read(client->buf_ev, recv_data, data_len);
+    if(nbytes <= 0)
+    {
+        printf("bufferevent_read %d bytes error!\n", data_len);
+        return;
+    }
+    CsPkg *msg_in;
+    msg_in = cs__pkg__unpack(NULL, data_len, (uint8_t*) &recv_data);
 
-        //3. 对接收到的数据包进行相应的处理 
-        if(msg_in != NULL)
+    //3. 对接收到的数据包进行相应的处理 
+    if(msg_in != NULL)
+    {
+        switch(msg_in->head_pkg->msg_id)
         {
-            switch(msg_in->head_pkg->msg_id)
-            {
-                case LOGIN_MSG:
-                    ret = deal_login_msg(msg_in, client);
-                    break;
-                case LOC_REPORT_MSG:
-                    ret = deal_loc_report_msg(msg_in, client);
-                    break;
-                default:
-                    printf("Error msg recved!\n");
-                    break;
+            case LOGIN_MSG:
+                ret = deal_login_msg(msg_in, client);
+                break;
+            case LOC_REPORT_MSG:
+                ret = deal_loc_report_msg(msg_in, client);
+                break;
+            default:
+                printf("Error msg recved!\n");
+                break;
             }
         }
         cs__pkg__free_unpacked(msg_in, NULL);
 
+        if(ret != 0)
+        {
+            printf("deal msg error, msg_id[%d], client[%d]", msg_in->head_pkg->msg_id, client->fd);
+            return;
+        }
+
+        bufferevent_write(client->buf_ev, client->response, client->response_len);
+    }
+    else
+    {
+        printf("msg decode error!\n");
+        return;
     }
 
 }
@@ -138,7 +143,7 @@ void buffered_on_write(struct bufferevent *bev, void *arg) {
  * descriptor.
  */
 void buffered_on_error(struct bufferevent *bev, short what, void *arg) {
-    closeClient((client_t *)arg);
+    closeAndFreeClient((client_t *)arg);
 }
 
 
@@ -219,7 +224,7 @@ void on_accept(evutil_socket_t fd, short ev, void *arg) {
 
     /* We have to enable it before our callbacks will be
      * called. */
-    bufferevent_enable(client->buf_ev, EV_READ);
+    bufferevent_enable(client->buf_ev, EV_READ|EV_WRITE);
 
 }
 
