@@ -18,6 +18,7 @@ int main()
 	struct sockaddr_in remote_addr;
 	char recv_buf[BUFSIZE];
 	void *send_buf;
+	CsPkg *msg_recv;
 
 	//set the remote addr
 	memset(&remote_addr, 0 , sizeof(remote_addr));
@@ -42,7 +43,7 @@ int main()
 
 	printf("======connected to the server======\n");
 
-	while(1)
+//	while(1)
 	{
 		//create a cspkg
 		CsPkg msg = CS__PKG__INIT;
@@ -76,7 +77,16 @@ int main()
 		len = send(client_fd, send_buf, len, 0);
 		len = recv(client_fd, recv_buf, BUFSIZE, 0);
 
-		printf("recved %s\n", recv_buf);
+		//解析接收到的包
+    	msg_recv = cs__pkg__unpack(NULL, len, (uint8_t*) &recv_buf);
+
+    	int recv_id = msg_recv->body_pkg->login_res_pkg->msg_id;
+    	char* server_name = msg_recv->body_pkg->login_res_pkg->server_name;
+    	int result_code = msg_recv->body_pkg->login_res_pkg->result_code;
+
+		printf("recved id[%d] server_name[%s] result_code[%d]\n", recv_id, server_name, result_code);
+
+		cs__pkg__free_unpacked(msg_recv, NULL);
 	}
 
 	close(client_fd);
