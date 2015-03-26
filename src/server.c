@@ -300,6 +300,7 @@ int runServer(void) {
     evbase_accept = NULL;
 
     close(listenfd);
+    killServer();
 
     printf("Server shutdown.\n");
 
