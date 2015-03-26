@@ -58,7 +58,7 @@ int deal_login_msg(CsPkg* msg, client_t* client)
     msg_back.head_pkg->msg_id = LOGIN_MSG;
     msg_back.body_pkg->login_res_pkg->msg_id = RES_PRINT_THE_PASSWORD;
     strncpy(msg_back.body_pkg->login_res_pkg->server_name, "hx-server", 
-                sizeof(msg_back.body_pkg->login_res_pkg->server_name));
+                NAME_SIZE);
     msg_back.body_pkg->login_res_pkg->result_code = 0;
 
     //序列化，按大小分配内存
